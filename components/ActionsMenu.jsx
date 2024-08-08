@@ -11,7 +11,7 @@ import {openDeleteDialog, openEditDialog, setSelectedItem, } from "../redux/feat
 
 const ITEM_HEIGHT = 48;
 
-export default function ModalMenu({ supportItem }) {
+export default function ActionsMenu({ supportItem }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   
@@ -72,7 +72,7 @@ export default function ModalMenu({ supportItem }) {
   );
 }
 
-ModalMenu.propTypes = {
+ActionsMenu.propTypes = {
   tipo: PropTypes.string,
   fecha: PropTypes.string,
   usuario: PropTypes.string,

@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Status from "./Status";
-import ModalMenu from "./ModalMenu";
+import ActionsMenu from "./ActionsMenu";
 import { useSelector } from "react-redux";
 import {
   Box,
@@ -29,6 +29,7 @@ export default function TableTwo() {
   const filterState = useSelector((state) => state.data.filterState);
   const filterType = useSelector((state) => state.data.filterType);
   const selectedDate = useSelector((state)=> state.data.filterDate)
+
   /**
    * We filter data in steps
    * 1- Filter by "Buscar" param
@@ -36,7 +37,6 @@ export default function TableTwo() {
    * 3- Filter by "Tipo"
    * 4- Filter by "Fecha"
    */
-
   const filterBySearchFilter = data.filter((row) => {
     return (
       row.problema.toLowerCase().includes(filterWord.toLowerCase()) ||
@@ -154,7 +154,7 @@ export default function TableTwo() {
                   <Status status={row.estado} />
                 </TableCell>
                 <TableCell>
-                  <ModalMenu supportItem={row} />
+                  <ActionsMenu supportItem={row} />
                 </TableCell>
               </TableRow>
             ))}
