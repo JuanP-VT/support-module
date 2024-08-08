@@ -6,5 +6,3 @@ export const store = configureStore({
     data: dataReducer,
   },
 });
-
-//Git Test
