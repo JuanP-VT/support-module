@@ -109,8 +109,7 @@ export default function TableTwo() {
             defaultValue=""
             onChange={(e) => dispatch(setFilterType(e.target.value))}
             sx={{ width: "200px", mr: 2 }}
-            size="small"
-            id="demo-simple-select"
+            size="small"            
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
@@ -120,6 +119,7 @@ export default function TableTwo() {
           </Select>
         </FormControl>
         <DatePicker
+        
           slotProps={{ textField: { size: "small" } }}
           label="Desde"
           format="yyyy/MM/dd"
