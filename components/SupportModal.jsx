@@ -17,7 +17,7 @@ import {  closeEditDialog, setSelectedItem } from "../redux/features/dataSlice";
 import { Close } from "@mui/icons-material";
 import { format } from "date-fns";
 
-export default function EditModal() {
+export default function SupportModal() {
   const dispatch = useDispatch();
   const selectedItem = useSelector((state) => state.data.selectedItem);
   const isOpen = useSelector((state) => state.data.isOpenEditDialog);
