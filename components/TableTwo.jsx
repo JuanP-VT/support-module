@@ -146,11 +146,11 @@ export default function TableTwo() {
             dispatch(openEditDialog());
           }}
           sx={{
-            backgroundColor: "green",
+            backgroundColor: "#22c55e",
             color: "white",
             ml: 1,
             "&:hover": {
-              backgroundColor: "lightgreen",
+              backgroundColor: "green",
               color: "white",
             },
           }}
