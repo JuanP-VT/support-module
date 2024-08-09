@@ -129,7 +129,7 @@ export default function SupportModal() {
               <MenuItem value="Cancelado">Cancelado</MenuItem>
             </Select>
           </FormControl>
-          <Box sx={{ p: 1 }}>
+          <Box sx={{ p: 1, display:"flex", justifyContent:"flex-end" }}>
             <Button
             onClick={()=> alert(JSON.stringify(selectedItem))}
               sx={{

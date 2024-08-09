@@ -1,14 +1,13 @@
 import TableTwo from "../components/TableTwo"
-import EditModal from "../components/EditModal"
 import DeleteModal from "../components/DeleteModal"
-
+import SupportModal from "../components/SupportModal"
 
 export default function App() {
 
   return (
     <div>
       <TableTwo />
-      <EditModal />
+      <SupportModal />
       <DeleteModal />
     </div>
   )
