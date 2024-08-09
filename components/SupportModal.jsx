@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {  closeEditDialog, setSelectedItem } from "../redux/features/dataSlice";
 import { Close } from "@mui/icons-material";
 import { format } from "date-fns";
+import Status from "./Status";
+import { statusList } from "../constants/ModuloSoporte";
 
 export default function SupportModal() {
   const dispatch = useDispatch();
@@ -44,6 +46,10 @@ export default function SupportModal() {
             sx={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
             onClick={() => dispatch(closeEditDialog())}
           />
+          <Box sx={{ display: "flex", mb:2 }}>
+          <Button>Normal</Button>
+          <Button>Cancelación</Button>
+          </Box>
           <Box sx={{ display: "flex" }}>
             <Autocomplete
               value={selectedItem.tipo}
@@ -123,10 +129,10 @@ export default function SupportModal() {
                 )
               }
             >
-              <MenuItem value="Completado">Completado</MenuItem>
-              <MenuItem value="Pendiente">Pendiente</MenuItem>
-              <MenuItem value="En progreso">En Progreso</MenuItem>
-              <MenuItem value="Cancelado">Cancelado</MenuItem>
+              <MenuItem value={statusList.COMPLETADO}><Status status={statusList.COMPLETADO} /></MenuItem>
+              <MenuItem value={statusList.PENDIENTE}><Status status={statusList.PENDIENTE} /></MenuItem>
+              <MenuItem value={statusList.ENPROGRESO}><Status status={statusList.ENPROGRESO} /></MenuItem>
+              <MenuItem value={statusList.CANCELADO}><Status status={statusList.CANCELADO} /></MenuItem>
             </Select>
           </FormControl>
           <Box sx={{ p: 1, display:"flex", justifyContent:"flex-end" }}>

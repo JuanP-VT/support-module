@@ -89,10 +89,10 @@ export default function TableTwo() {
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
-            <MenuItem value={statusList.COMPLETADO}>Completado</MenuItem>
-            <MenuItem value={statusList.ENPROGRESO}>En Progreso</MenuItem>
-            <MenuItem value={statusList.PENDIENTE}>Pendiente</MenuItem>
-            <MenuItem value={statusList.CANCELADO}>Cancelado</MenuItem>
+            <MenuItem value={statusList.COMPLETADO}><Status status={statusList.COMPLETADO} /></MenuItem>
+            <MenuItem value={statusList.ENPROGRESO}><Status status={statusList.ENPROGRESO} /></MenuItem>
+            <MenuItem value={statusList.PENDIENTE}><Status status={statusList.PENDIENTE} /></MenuItem>
+            <MenuItem value={statusList.CANCELADO}><Status status={statusList.CANCELADO} /></MenuItem>
           </Select>
         </FormControl>
         <FormControl>
