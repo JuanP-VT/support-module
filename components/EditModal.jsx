@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {  closeEditDialog, setSelectedItem } from "../redux/features/dataSlice";
 import { Close } from "@mui/icons-material";
+import { format } from "date-fns";
 
 export default function EditModal() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export default function EditModal() {
           }}
         >
           <Typography variant="h5" sx={{ mb: 2 }}>
-            Editar Registro De Soporte
+            Registro De Soporte
           </Typography>
           <Close
             sx={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
@@ -56,9 +57,12 @@ export default function EditModal() {
               renderInput={(params) => <TextField {...params} label="Tipo" />}
             />
             <DatePicker
-              value={new Date(selectedItem.fecha)}
-              onAccept={(e) =>
-                dispatch(setSelectedItem({ ...selectedItem, fecha: e }))
+              value={selectedItem.fecha ? new Date(selectedItem.fecha) : null}
+              onAccept={(e) =>{
+                const formattedDate = format(e, "yyyy-MM-dd");
+                dispatch(setSelectedItem({ ...selectedItem, fecha: formattedDate }))
+              }
+                
               }
               slotProps={{ textField: { size: "small" } }}
               sx={{ mb: 2 }}

@@ -392,10 +392,10 @@ function TableOne() {
           defaultValue={new Date()}
           slotProps={{ textField: { size: "small" } }}
           label="Desde"
-          format="yyyy-MM-dd"
+          format="yyyy/MM/dd"
           onAccept={(newValue) => {
             if (newValue) {
-              const formattedDate = format(newValue, "yyyy-MM-dd");
+              const formattedDate = format(newValue, "yyyy/MM/dd");
               setSelectedDate(formattedDate);
             }
           }}

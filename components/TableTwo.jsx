@@ -10,6 +10,7 @@ import ActionsMenu from "./ActionsMenu";
 import { useSelector } from "react-redux";
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -18,18 +19,25 @@ import {
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import { setFilterDate, setFilterState, setFilterType, setFilterWord } from "../redux/features/dataSlice";
-import {statusList} from "../constants/ModuloSoporte";
+import {
+  openEditDialog,
+  setFilterDate,
+  setFilterState,
+  setFilterType,
+  setFilterWord,
+  setSelectedItem,
+} from "../redux/features/dataSlice";
+import { statusList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
+
 export default function TableTwo() {
   const data = useSelector((state) => state.data.value);
   const dispatch = useDispatch();
   const filterWord = useSelector((state) => state.data.filterWord);
   const filterState = useSelector((state) => state.data.filterState);
   const filterType = useSelector((state) => state.data.filterType);
-  const selectedDate = useSelector((state)=> state.data.filterDate)
-
+  const selectedDate = useSelector((state) => state.data.filterDate);
   /**
    * We filter data in steps
    * 1- Filter by "Buscar" param
@@ -52,35 +60,32 @@ export default function TableTwo() {
   );
 
   const filteredByDate = filterByType.filter((row) => {
-    if (!selectedDate) return row
+    if (!selectedDate) return row;
     return (
       isAfter(new Date(row.fecha), new Date(selectedDate)) ||
       isSameDay(new Date(row.fecha), new Date(selectedDate))
     );
   });
 
-
-  
-  
   return (
     <div>
       <Box sx={{ p: 2, display: "flex" }}>
         <TextField
           onChange={(e) => dispatch(setFilterWord(e.target.value))}
-          sx={{width:"200px", mr: 2 }}
+          sx={{ width: "200px", mr: 2 }}
           label="Buscar"
           size="small"
           InputProps={{
             startAdornment: <Search />,
           }}
         />
-        <FormControl >
+        <FormControl>
           <InputLabel>Estado</InputLabel>
           <Select
             defaultValue=""
             onChange={(e) => dispatch(setFilterState(e.target.value))}
-            sx={{width:"200px", mr: 2 }}
-            size="small"       
+            sx={{ width: "200px", mr: 2 }}
+            size="small"
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
@@ -90,14 +95,13 @@ export default function TableTwo() {
             <MenuItem value={statusList.CANCELADO}>Cancelado</MenuItem>
           </Select>
         </FormControl>
-        <FormControl >
+        <FormControl>
           <InputLabel>Tipo</InputLabel>
           <Select
             defaultValue=""
             onChange={(e) => dispatch(setFilterType(e.target.value))}
-            sx={{width:"200px", mr: 2 }}
+            sx={{ width: "200px", mr: 2 }}
             size="small"
-            
             id="demo-simple-select"
             label="Estatus"
           >
@@ -108,17 +112,33 @@ export default function TableTwo() {
           </Select>
         </FormControl>
         <DatePicker
-      
           slotProps={{ textField: { size: "small" } }}
           label="Desde"
           format="yyyy/MM/dd"
           onAccept={(newValue) => {
             if (newValue) {
               const formattedDate = format(newValue, "yyyy/MM/dd");
-              dispatch(setFilterDate(formattedDate))
+              dispatch(setFilterDate(formattedDate));
             }
           }}
         />
+        <Button
+        onClick={()=> {
+          dispatch(setSelectedItem({}))
+          dispatch(openEditDialog())
+        }}
+          sx={{
+            backgroundColor: "green",
+            color: "white",
+            ml: 1,
+            "&:hover": {
+              backgroundColor: "lightgreen",
+              color: "white",
+            },
+          }}
+        >
+          Nuevo
+        </Button>
       </Box>
       <TableContainer component={Paper}>
         <Table size="small">
