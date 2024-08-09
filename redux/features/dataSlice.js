@@ -53,7 +53,7 @@ const data = [
   {
     tipo: typeList.REGISTRO,
     fecha: "2024/12/15",
-    usuario: "Ana Gómez",
+    usuario: "Jorge Frausto",
     problema: "Producto dañado",
     solución: "Se procesa reembolso",
     estado: statusList.COMPLETADO,
@@ -61,7 +61,7 @@ const data = [
   {
     tipo: typeList.REGISTRO,
     fecha: "2024/12/16",
-    usuario: "Carlos Ruiz",
+    usuario: "Jorge Frausto",
     problema: "Talla incorrecta",
     solución: "Se envía nueva talla",
     estado: statusList.PENDIENTE,
@@ -69,7 +69,7 @@ const data = [
   {
     tipo: typeList.REGISTRO,
     fecha: "2024/12/17",
-    usuario: "Elena Martínez",
+    usuario: "Jorge Frausto",
     problema: "Error de validación",
     solución: "Se corrige formulario",
     estado: statusList.ENPROGRESO,
@@ -77,7 +77,7 @@ const data = [
   {
     tipo: typeList.SOPORTE,
     fecha: "2024/12/18",
-    usuario: "Luis Sánchez",
+    usuario: "Mario Perez",
     problema: "Transacción rechazada",
     solución: "Se contacta al banco",
     estado: statusList.CANCELADO,
@@ -85,7 +85,7 @@ const data = [
   {
     tipo: typeList.SOPORTE,
     fecha: "2024/12/19",
-    usuario: "María Torres",
+    usuario: "Mario Perez",
     problema: "Dirección incorrecta",
     solución: "Se actualiza dirección",
     estado: statusList.ENPROGRESO,
@@ -93,7 +93,7 @@ const data = [
   {
     tipo: typeList.SOPORTE,
     fecha: "2024/12/20",
-    usuario: "Pedro Díaz",
+    usuario: "Mario Perez",
     problema: "Información de producto",
     solución: "Se proporciona detalles",
     estado: statusList.COMPLETADO,
