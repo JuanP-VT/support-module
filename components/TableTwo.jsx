@@ -124,7 +124,7 @@ export default function TableTwo() {
         />
         <Button
         onClick={()=> {
-          dispatch(setSelectedItem({}))
+          dispatch(setSelectedItem({tipo:"", fecha:"", usuario:"", problema:"", solución:"", estado:""}))
           dispatch(openEditDialog())
         }}
           sx={{
