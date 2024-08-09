@@ -27,7 +27,7 @@ import {
   setFilterWord,
   setSelectedItem,
 } from "../redux/features/dataSlice";
-import { statusList } from "../constants/ModuloSoporte";
+import { statusList, typeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
 
@@ -89,10 +89,18 @@ export default function TableTwo() {
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
-            <MenuItem value={statusList.COMPLETADO}><Status status={statusList.COMPLETADO} /></MenuItem>
-            <MenuItem value={statusList.ENPROGRESO}><Status status={statusList.ENPROGRESO} /></MenuItem>
-            <MenuItem value={statusList.PENDIENTE}><Status status={statusList.PENDIENTE} /></MenuItem>
-            <MenuItem value={statusList.CANCELADO}><Status status={statusList.CANCELADO} /></MenuItem>
+            <MenuItem value={statusList.COMPLETADO}>
+              <Status status={statusList.COMPLETADO} />
+            </MenuItem>
+            <MenuItem value={statusList.ENPROGRESO}>
+              <Status status={statusList.ENPROGRESO} />
+            </MenuItem>
+            <MenuItem value={statusList.PENDIENTE}>
+              <Status status={statusList.PENDIENTE} />
+            </MenuItem>
+            <MenuItem value={statusList.CANCELADO}>
+              <Status status={statusList.CANCELADO} />
+            </MenuItem>
           </Select>
         </FormControl>
         <FormControl>
@@ -106,9 +114,9 @@ export default function TableTwo() {
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
-            <MenuItem value={"Cancelación"}>Cancelación</MenuItem>
-            <MenuItem value={"Soporte"}>Soporte</MenuItem>
-            <MenuItem value={"Registro"}>Registro</MenuItem>
+            <MenuItem value={typeList.CANCELACIÓN}>{typeList.CANCELACIÓN}</MenuItem>
+            <MenuItem value={typeList.SOPORTE}>{typeList.SOPORTE}</MenuItem>
+            <MenuItem value={typeList.REGISTRO}>{typeList.REGISTRO}</MenuItem>
           </Select>
         </FormControl>
         <DatePicker
@@ -122,11 +130,21 @@ export default function TableTwo() {
             }
           }}
         />
+        {/** Reset Selected Item */}
         <Button
-        onClick={()=> {
-          dispatch(setSelectedItem({tipo:"", fecha:"", usuario:"", problema:"", solución:"", estado:""}))
-          dispatch(openEditDialog())
-        }}
+          onClick={() => {
+            dispatch(
+              setSelectedItem({
+                tipo:"",
+                fecha: "",
+                usuario: "",
+                problema: "",
+                solución: "",
+                estado: "",
+              })
+            );
+            dispatch(openEditDialog());
+          }}
           sx={{
             backgroundColor: "green",
             color: "white",
