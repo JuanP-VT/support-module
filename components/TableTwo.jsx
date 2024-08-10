@@ -84,7 +84,7 @@ export default function TableTwo() {
           <Select
             defaultValue=""
             onChange={(e) => dispatch(setFilterState(e.target.value))}
-            sx={{ width: "200px", mr: 2 }}
+            sx={{ width: "150px", mr: 2 }}
             size="small"
             label="Estatus"
           >
@@ -108,18 +108,19 @@ export default function TableTwo() {
           <Select
             defaultValue=""
             onChange={(e) => dispatch(setFilterType(e.target.value))}
-            sx={{ width: "200px", mr: 2 }}
-            size="small"            
+            sx={{ width: "150px", mr: 2 }}
+            size="small"
             label="Estatus"
           >
             <MenuItem value="">-</MenuItem>
-            <MenuItem value={typeList.CANCELACIÓN}>{typeList.CANCELACIÓN}</MenuItem>
+            <MenuItem value={typeList.CANCELACIÓN}>
+              {typeList.CANCELACIÓN}
+            </MenuItem>
             <MenuItem value={typeList.SOPORTE}>{typeList.SOPORTE}</MenuItem>
             <MenuItem value={typeList.REGISTRO}>{typeList.REGISTRO}</MenuItem>
           </Select>
         </FormControl>
         <DatePicker
-        
           slotProps={{ textField: { size: "small" } }}
           label="Desde"
           format="yyyy/MM/dd"
@@ -135,7 +136,7 @@ export default function TableTwo() {
           onClick={() => {
             dispatch(
               setSelectedItem({
-                tipo:"",
+                tipo: "",
                 fecha: "",
                 usuario: "",
                 problema: "",
