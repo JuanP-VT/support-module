@@ -37,7 +37,7 @@ export default function SupportModalNormal() {
         <DatePicker
           value={selectedItem.fecha ? new Date(selectedItem.fecha) : null}
           onAccept={(e) => {
-            const formattedDate = format(e, "yyyy-MM-dd");
+            const formattedDate = format(e, "yyyy/MM/dd");
             dispatch(
               setSelectedItem({ ...selectedItem, fecha: formattedDate })
             );
@@ -45,7 +45,7 @@ export default function SupportModalNormal() {
           slotProps={{ textField: { size: "small" ,} }}
           sx={{ mb: 2, mr:1 }}
           label="Desde"
-          format="yyyy-MM-dd"
+          format="yyyy/MM/dd"
         />
         <Autocomplete
           freeSolo
