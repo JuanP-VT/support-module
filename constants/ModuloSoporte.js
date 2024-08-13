@@ -10,3 +10,8 @@ export const typeList = {
   REGISTRO: "Registro",
   SOPORTE: "Soporte",
 };
+
+export const cancelationList = {
+  GUÍA: "Guía",
+  RECEPCIÓN: "Recepción",
+};
