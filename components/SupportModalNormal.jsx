@@ -31,7 +31,7 @@ export default function SupportModalNormal() {
             dispatch(setSelectedItem({ ...selectedItem, tipo: val }))
           }
           size="small"
-          sx={{ width: 170, mr:1 }}          
+          sx={{ width: 170, mr:5 }}          
           renderInput={(params) => <TextField {...params} label="Tipo" />}
         />
         <DatePicker
@@ -43,7 +43,7 @@ export default function SupportModalNormal() {
             );
           }}
           slotProps={{ textField: { size: "small" ,} }}
-          sx={{ mb: 2, mr:1 }}
+          sx={{ mb: 2, mr:5 }}
           label="Desde"
           format="yyyy/MM/dd"
         />
@@ -55,7 +55,7 @@ export default function SupportModalNormal() {
             dispatch(setSelectedItem({ ...selectedItem, usuario: val }))
           }
           size="small"
-          sx={{ width: 200 }}
+          sx={{ width: 305 }}
           onKeyDown={(e) => e.stopPropagation()}
           renderInput={(params) => <TextField {...params} label="Usuario" />}
         />
@@ -70,7 +70,7 @@ export default function SupportModalNormal() {
           }
           placeholder="Descripción del problema"
           minRows={3}
-          sx={{ width: 300, mr: 2 }}
+          sx={{ width: 400, mr: 2 }}
           onKeyDown={(e) => e.stopPropagation()}
         />
         <Textarea
@@ -78,7 +78,7 @@ export default function SupportModalNormal() {
           placeholder="Solución"
           label="Solución"
           minRows={3}
-          sx={{ width: 320 }}
+          sx={{ width: 400 }}
           onChange={(e) =>
             dispatch(
               setSelectedItem({ ...selectedItem, solución: e.target.value })
