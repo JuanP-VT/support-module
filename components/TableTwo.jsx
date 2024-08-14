@@ -113,7 +113,7 @@ export default function TableTwo() {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <FormControl sx={{ width: "100%", maxWidth: "150px", mr: 1, my: 1 }}>
-            <InputLabel>Tipo</InputLabel>
+            <InputLabel sx={{ my: -1 }}>Tipo</InputLabel>
             <Select
               sx={{
                 width: "100%",
