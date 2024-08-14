@@ -26,18 +26,22 @@ import {
   setFilterType,
   setFilterWord,
   setSelectedItem,
-} from "../redux/features/dataSlice";
+} from "../redux/features/newSupportModuleSlice";
 import { statusList, typeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
 
 export default function TableTwo() {
-  const data = useSelector((state) => state.data.value);
+  const data = useSelector((state) => state.newSupportModule.value);
   const dispatch = useDispatch();
-  const filterWord = useSelector((state) => state.data.filterWord);
-  const filterState = useSelector((state) => state.data.filterState);
-  const filterType = useSelector((state) => state.data.filterType);
-  const selectedDate = useSelector((state) => state.data.filterDate);
+  const filterWord = useSelector((state) => state.newSupportModule.filterWord);
+  const filterState = useSelector(
+    (state) => state.newSupportModule.filterState
+  );
+  const filterType = useSelector((state) => state.newSupportModule.filterType);
+  const selectedDate = useSelector(
+    (state) => state.newSupportModule.filterDate
+  );
   /**
    * We filter data in steps
    * 1- Filter by "Buscar" param

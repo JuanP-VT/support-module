@@ -11,14 +11,19 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { closeEditDialog, setSelectedItem } from "../redux/features/dataSlice";
+import {
+  closeEditDialog,
+  setSelectedItem,
+} from "../redux/features/newSupportModuleSlice";
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
 import { Textarea } from "@mui/joy";
 
 export default function SupportModalNormal() {
   const dispatch = useDispatch();
-  const selectedItem = useSelector((state) => state.data.selectedItem);
+  const selectedItem = useSelector(
+    (state) => state.newSupportModule.selectedItem
+  );
 
   return (
     <Box>

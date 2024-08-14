@@ -3,17 +3,21 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { closeEditDialog } from "../redux/features/dataSlice";
+import { closeEditDialog } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 import SupportModalNormal from "./SupportModalNormal";
 import { useState } from "react";
 import SupportModalDelete from "./SupportModalDelete";
 export default function SupportModal() {
   const dispatch = useDispatch();
-  const isOpen = useSelector((state) => state.data.isOpenEditDialog);
+  const isOpen = useSelector(
+    (state) => state.newSupportModule.isOpenEditDialog
+  );
   //State to change between normal and cancelation
   const [isNormalMode, setIsNormalMode] = useState(false);
-  const selectedItem = useSelector((state) => state.data.selectedItem);
+  const selectedItem = useSelector(
+    (state) => state.newSupportModule.selectedItem
+  );
 
   return (
     <div>

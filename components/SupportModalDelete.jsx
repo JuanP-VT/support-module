@@ -6,7 +6,7 @@ import {
   setCancelation,
   setCancelationReason,
   setGuideNumberOrUser,
-} from "../redux/features/dataSlice";
+} from "../redux/features/newSupportModuleSlice";
 import { cancelationList } from "../constants/ModuloSoporte";
 import {
   Autocomplete,
@@ -24,7 +24,9 @@ import {
 import { ArrowRightAlt, Search } from "@mui/icons-material";
 export default function SupportModalDelete() {
   const dispatch = useDispatch();
-  const cancelation = useSelector((state) => state.data.cancelation);
+  const cancelation = useSelector(
+    (state) => state.newSupportModule.cancelation
+  );
   const handleChange = (event, newAlignment) => {
     dispatch(setCancelation(newAlignment));
   };

@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataReducer from "./features/dataSlice";
+import newSupportModuleReducer from "./features/newSupportModuleSlice";
 
 export const store = configureStore({
   reducer: {
-    data: dataReducer,
+    newSupportModule: newSupportModuleReducer,
   },
 });

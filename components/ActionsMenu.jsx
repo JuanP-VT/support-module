@@ -10,7 +10,7 @@ import {
   openDeleteDialog,
   openEditDialog,
   setSelectedItem,
-} from "../redux/features/dataSlice";
+} from "../redux/features/newSupportModuleSlice";
 
 export default function ActionsMenu({ supportItem }) {
   const [anchorEl, setAnchorEl] = React.useState(null);

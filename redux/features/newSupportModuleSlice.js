@@ -117,8 +117,8 @@ const initialState = {
   cancelationReason: "",
 };
 
-const dataSlice = createSlice({
-  name: "data",
+const newSupportModule = createSlice({
+  name: "newSupportModule",
   initialState,
   reducers: {
     setSelectedItem: (state, action) => {
@@ -172,7 +172,7 @@ export const {
   setCancelation,
   setGuideNumberOrUser,
   setCancelationReason,
-} = dataSlice.actions;
+} = newSupportModule.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 
-export default dataSlice.reducer;
+export default newSupportModule.reducer;
