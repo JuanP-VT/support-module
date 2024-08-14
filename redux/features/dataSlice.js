@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { statusList, typeList } from "../../constants/ModuloSoporte";
+import {
+  statusList,
+  typeList,
+  cancelationList,
+} from "../../constants/ModuloSoporte";
 //Data Mock
 const data = [
   {
@@ -108,6 +112,9 @@ const initialState = {
   filterState: "",
   filterType: "",
   filterDate: "",
+  cancelation: cancelationList.GUÍA,
+  searchGuideNumberOrUser: "",
+  cancelationReason: "",
 };
 
 const dataSlice = createSlice({
@@ -141,6 +148,15 @@ const dataSlice = createSlice({
     setFilterDate: (state, action) => {
       state.filterDate = action.payload;
     },
+    setCancelation: (state, action) => {
+      state.cancelation = action.payload;
+    },
+    setGuideNumberOrUser: (state, action) => {
+      state.searchGuideNumberOrUser = action.payload;
+    },
+    setCancelationReason: (state, action) => {
+      state.cancelationReason = action.payload;
+    },
   },
 });
 export const {
@@ -153,6 +169,9 @@ export const {
   setFilterState,
   setFilterType,
   setFilterDate,
+  setCancelation,
+  setGuideNumberOrUser,
+  setCancelationReason,
 } = dataSlice.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 
