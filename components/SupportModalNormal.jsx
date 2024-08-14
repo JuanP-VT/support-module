@@ -22,7 +22,13 @@ export default function SupportModalNormal() {
 
   return (
     <Box>
-      <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "center", md: "space-between" },
+          flexDirection: { xs: "column", md: "row" },
+        }}
+      >
         <Autocomplete
           value={selectedItem.tipo}
           options={options}
@@ -31,7 +37,7 @@ export default function SupportModalNormal() {
             dispatch(setSelectedItem({ ...selectedItem, tipo: val }))
           }
           size="small"
-          sx={{ width: 170, mr:5 }}          
+          sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
           renderInput={(params) => <TextField {...params} label="Tipo" />}
         />
         <DatePicker
@@ -42,8 +48,8 @@ export default function SupportModalNormal() {
               setSelectedItem({ ...selectedItem, fecha: formattedDate })
             );
           }}
-          slotProps={{ textField: { size: "small" ,} }}
-          sx={{ mb: 2, mr:5 }}
+          slotProps={{ textField: { size: "small" } }}
+          sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
           label="Desde"
           format="yyyy/MM/dd"
         />
@@ -55,12 +61,18 @@ export default function SupportModalNormal() {
             dispatch(setSelectedItem({ ...selectedItem, usuario: val }))
           }
           size="small"
-          sx={{ width: 305 }}
+          sx={{ mb: 2, mr: 1, width: "100%", maxWidth: 200 }}
           onKeyDown={(e) => e.stopPropagation()}
           renderInput={(params) => <TextField {...params} label="Usuario" />}
         />
       </Box>
-      <Box sx={{ display: "flex", mb: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          mb: 2,
+          flexDirection: { xs: "column", md: "row" },
+        }}
+      >
         <Textarea
           value={selectedItem.problema}
           onChange={(e) =>
@@ -70,7 +82,7 @@ export default function SupportModalNormal() {
           }
           placeholder="Descripción del problema"
           minRows={3}
-          sx={{ width: 400, mr: 2 }}
+          sx={{ width: "100%", mr: 2 }}
           onKeyDown={(e) => e.stopPropagation()}
         />
         <Textarea
@@ -78,7 +90,7 @@ export default function SupportModalNormal() {
           placeholder="Solución"
           label="Solución"
           minRows={3}
-          sx={{ width: 400 }}
+          sx={{ width: "100%", my: 1 }}
           onChange={(e) =>
             dispatch(
               setSelectedItem({ ...selectedItem, solución: e.target.value })
