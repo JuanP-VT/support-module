@@ -12,7 +12,7 @@ export default function SupportModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.data.isOpenEditDialog);
   //State to change between normal and cancelation
-  const [isNormalMode, setIsNormalMode] = useState(true);
+  const [isNormalMode, setIsNormalMode] = useState(false);
   const selectedItem = useSelector((state) => state.data.selectedItem);
 
   return (
@@ -20,11 +20,12 @@ export default function SupportModal() {
       <Modal open={isOpen} onClose={() => dispatch(closeEditDialog())}>
         <Box
           sx={{
+            width: "100%",
+            maxWidth: "800px",
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 900,
             bgcolor: "background.paper",
             border: "2px solid #000",
             boxShadow: 24,
@@ -32,8 +33,8 @@ export default function SupportModal() {
           }}
         >
           <Typography variant="h5" sx={{ mb: 2 }}>
-          {selectedItem.tipo && "Editar Registro de Soporte"}
-          {!selectedItem.tipo && "Nuevo Registro de Soporte"}
+            {selectedItem.tipo && "Editar Registro de Soporte"}
+            {!selectedItem.tipo && "Nuevo Registro de Soporte"}
           </Typography>
           <Close
             sx={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
