@@ -1,3 +1,4 @@
+import { useLazyGetSupportReportsQuery } from "../redux/api/supportModuleApi";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -30,10 +31,21 @@ import {
 import { statusList, typeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
+import { useEffect } from "react";
 
 export default function TableTwo() {
-  const data = useSelector((state) => state.newSupportModule.value);
   const dispatch = useDispatch();
+
+  const [getSupportReports, { data: supportItemList }] =
+    useLazyGetSupportReportsQuery();
+  useEffect(() => {
+    const getReports = async () => {
+      await getSupportReports();
+    };
+    getReports();
+  }, [getSupportReports]);
+  console.log(supportItemList);
+
   const filterWord = useSelector((state) => state.newSupportModule.filterWord);
   const filterState = useSelector(
     (state) => state.newSupportModule.filterState
@@ -49,25 +61,30 @@ export default function TableTwo() {
    * 3- Filter by "Tipo"
    * 4- Filter by "Fecha"
    */
-  const filterBySearchFilter = data.filter((row) => {
+
+  const filterBySearchFilter = supportItemList?.filter((supportItem) => {
     return (
-      row.problema.toLowerCase().includes(filterWord.toLowerCase()) ||
-      row.solución.toLowerCase().includes(filterWord.toLowerCase()) ||
-      row.usuario.toLowerCase().includes(filterWord.toLowerCase())
+      supportItem.problemDescription
+        .toLowerCase()
+        .includes(filterWord.toLowerCase()) ||
+      supportItem.solutionDescription
+        .toLowerCase()
+        .includes(filterWord.toLowerCase()) ||
+      supportItem.user.toLowerCase().includes(filterWord.toLowerCase())
     );
   });
-  const filterByStatus = filterBySearchFilter.filter((row) =>
-    row.estado.toLowerCase().includes(filterState.toLowerCase())
+  const filterByStatus = filterBySearchFilter?.filter((supportItem) =>
+    supportItem.supportState.toLowerCase().includes(filterState.toLowerCase())
   );
-  const filterByType = filterByStatus.filter((row) =>
-    row.tipo.toLowerCase().includes(filterType.toLowerCase())
+  const filterByType = filterByStatus?.filter((supportItem) =>
+    supportItem.type.toLowerCase().includes(filterType.toLowerCase())
   );
 
-  const filteredByDate = filterByType.filter((row) => {
-    if (!selectedDate) return row;
+  const filteredByDate = filterByType?.filter((supportItem) => {
+    if (!selectedDate) return supportItem;
     return (
-      isAfter(new Date(row.fecha), new Date(selectedDate)) ||
-      isSameDay(new Date(row.fecha), new Date(selectedDate))
+      isAfter(new Date(supportItem.date), new Date(selectedDate)) ||
+      isSameDay(new Date(supportItem.date), new Date(selectedDate))
     );
   });
 
@@ -133,8 +150,8 @@ export default function TableTwo() {
               <MenuItem value={typeList.CANCELACIÓN}>
                 {typeList.CANCELACIÓN}
               </MenuItem>
-              <MenuItem value={typeList.SOPORTE}>{typeList.SOPORTE}</MenuItem>
-              <MenuItem value={typeList.REGISTRO}>{typeList.REGISTRO}</MenuItem>
+              <MenuItem value={typeList.QUEJA}>{typeList.QUEJA}</MenuItem>
+              <MenuItem value={typeList.RECLAMO}>{typeList.RECLAMO}</MenuItem>
             </Select>
           </FormControl>
           <DatePicker
@@ -197,25 +214,27 @@ export default function TableTwo() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredByDate.map((row, index) => (
+            {filteredByDate?.map((supportItem, index) => (
               <TableRow
-                key={`${index}-${row.id}`}
+                key={`${index}-${supportItem.id}`}
                 sx={{
                   height: "50px",
                 }}
               >
-                <TableCell component="th" scope="row">
-                  {row.tipo}
-                </TableCell>
-                <TableCell>{row.fecha}</TableCell>
-                <TableCell>{row.usuario}</TableCell>
-                <TableCell>{row.problema}</TableCell>
-                <TableCell>{row.solución}</TableCell>
-                <TableCell>
-                  <Status status={row.estado} />
+                <TableCell sx={{ textTransform: "capitalize" }}>
+                  {supportItem.type}
                 </TableCell>
                 <TableCell>
-                  <ActionsMenu supportItem={row} />
+                  {format(new Date(supportItem.date), "dd/MM/yyyy")}
+                </TableCell>
+                <TableCell>{supportItem.user}</TableCell>
+                <TableCell>{supportItem.problemDescription}</TableCell>
+                <TableCell>{supportItem.solutionDescription}</TableCell>
+                <TableCell>
+                  <Status status={supportItem.supportState} />
+                </TableCell>
+                <TableCell>
+                  <ActionsMenu supportItem={supportItem} />
                 </TableCell>
               </TableRow>
             ))}
