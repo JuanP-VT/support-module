@@ -7,8 +7,9 @@ export const statusList = {
 
 export const typeList = {
   CANCELACIÓN: "Cancelación",
-  REGISTRO: "Registro",
-  SOPORTE: "Soporte",
+  RECLAMO: "reclamo",
+  QUEJA: "queja",
+  DEVOLUCIÓN: "devolución",
 };
 
 export const cancelationList = {
