@@ -1,8 +1,8 @@
 export const statusList = {
-  COMPLETADO: "Completado",
-  ENPROGRESO: "En progreso",
-  PENDIENTE: "Pendiente",
-  CANCELADO: "Cancelado",
+  COMPLETADO: "completado",
+  ENPROGRESO: "en progreso",
+  PENDIENTE: "pendiente",
+  CANCELADO: "cancelado",
 };
 
 export const typeList = {
