@@ -8,7 +8,7 @@ import { Close } from "@mui/icons-material";
 import SupportModalNormal from "./NewSupportModalNormal";
 import { useState } from "react";
 import NewSupportModalCancelation from "./NewSupportModalCancelation";
-export default function SupportModal() {
+export default function NewSupportDialog() {
   const dispatch = useDispatch();
   const isOpen = useSelector(
     (state) => state.newSupportModule.isOpenCreateNewDialog
