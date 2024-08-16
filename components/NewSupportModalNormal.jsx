@@ -1,7 +1,6 @@
 import {
   Autocomplete,
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -9,21 +8,22 @@ import {
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { format } from "date-fns";
+import { formatISO } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  closeEditDialog,
-  setSelectedItem,
+  setNewItem,
+  setSelectedTracking,
 } from "../redux/features/newSupportModuleSlice";
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
 import { Textarea } from "@mui/joy";
 
-export default function SupportModalNormal() {
+export default function NewSupportModalNormal() {
   const dispatch = useDispatch();
-  const selectedItem = useSelector(
-    (state) => state.newSupportModule.selectedItem
-  );
+  const newItem = useSelector((state) => state.newSupportModule.newItem);
+
+  const options = ["Cancelación", "Queja", "Reclamo"];
+  const usuarios = ["Jorge Frausto", "Mario Perez"];
 
   return (
     <Box>
@@ -35,23 +35,22 @@ export default function SupportModalNormal() {
         }}
       >
         <Autocomplete
-          value={selectedItem.tipo}
+          value={newItem.type}
           options={options}
           freeSolo
-          onChange={(_, val) =>
-            dispatch(setSelectedItem({ ...selectedItem, tipo: val }))
-          }
+          onChange={(_, val) => {
+            dispatch(setNewItem({ ...newItem, type: val }));
+            dispatch(setSelectedTracking({}));
+          }}
           size="small"
           sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
           renderInput={(params) => <TextField {...params} label="Tipo" />}
         />
         <DatePicker
-          value={selectedItem.fecha ? new Date(selectedItem.fecha) : null}
+          value={newItem.date ? new Date(newItem.date) : null}
           onAccept={(e) => {
-            const formattedDate = format(e, "yyyy/MM/dd");
-            dispatch(
-              setSelectedItem({ ...selectedItem, fecha: formattedDate })
-            );
+            const formattedDate = formatISO(e);
+            dispatch(setNewItem({ ...newItem, date: formattedDate }));
           }}
           slotProps={{ textField: { size: "small" } }}
           sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
@@ -60,14 +59,11 @@ export default function SupportModalNormal() {
         />
         <Autocomplete
           freeSolo
-          value={selectedItem.usuario}
+          value={newItem.user}
           options={usuarios}
-          onChange={(_, val) =>
-            dispatch(setSelectedItem({ ...selectedItem, usuario: val }))
-          }
+          onChange={(_, val) => dispatch(setNewItem({ ...newItem, user: val }))}
           size="small"
           sx={{ mb: 2, mr: 1, width: "100%", maxWidth: 200 }}
-          onKeyDown={(e) => e.stopPropagation()}
           renderInput={(params) => <TextField {...params} label="Usuario" />}
         />
       </Box>
@@ -79,42 +75,44 @@ export default function SupportModalNormal() {
         }}
       >
         <Textarea
-          value={selectedItem.problema}
+          value={newItem.problemDescription}
           onChange={(e) =>
             dispatch(
-              setSelectedItem({ ...selectedItem, problema: e.target.value })
+              setNewItem({
+                ...newItem,
+                problemDescription: e.target.value,
+              })
             )
           }
           placeholder="Descripción del problema"
           minRows={3}
           sx={{ width: "100%", mr: 2 }}
-          onKeyDown={(e) => e.stopPropagation()}
         />
         <Textarea
-          value={selectedItem.solución}
+          value={newItem.solutionDescription}
           placeholder="Solución"
           label="Solución"
           minRows={3}
           sx={{ width: "100%", my: 1 }}
           onChange={(e) =>
             dispatch(
-              setSelectedItem({ ...selectedItem, solución: e.target.value })
+              setNewItem({
+                ...newItem,
+                solutionDescription: e.target.value,
+              })
             )
           }
-          onKeyDown={(e) => e.stopPropagation()}
         />
       </Box>
       <FormControl fullWidth>
         <InputLabel>Estatus</InputLabel>
         <Select
-          value={selectedItem.estado}
+          value={newItem.supportState}
           sx={{ width: "150px" }}
           size="small"
           label="Estatus"
           onChange={(e) =>
-            dispatch(
-              setSelectedItem({ ...selectedItem, estado: e.target.value })
-            )
+            dispatch(setNewItem({ ...newItem, supportState: e.target.value }))
           }
         >
           <MenuItem value={statusList.COMPLETADO}>
@@ -131,37 +129,6 @@ export default function SupportModalNormal() {
           </MenuItem>
         </Select>
       </FormControl>
-      <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          onClick={() => alert(JSON.stringify(selectedItem))}
-          sx={{
-            backgroundColor: "green",
-            color: "white",
-            mr: 1,
-            "&:hover": {
-              backgroundColor: "lightgreen",
-              color: "white",
-            },
-          }}
-        >
-          Aceptar
-        </Button>
-        <Button
-          onClick={() => dispatch(closeEditDialog())}
-          sx={{
-            backgroundColor: "red",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "orange",
-              color: "white",
-            },
-          }}
-        >
-          Cancelar
-        </Button>
-      </Box>
     </Box>
   );
 }
-const options = ["Cancelación", "Soporte"];
-const usuarios = ["Jorge Frausto", "Mario Perez"];

@@ -21,12 +21,11 @@ import {
 import { Search } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import {
-  openEditDialog,
+  openCreateNewDialog,
   setFilterDate,
   setFilterState,
   setFilterType,
   setFilterWord,
-  setSelectedItem,
 } from "../redux/features/newSupportModuleSlice";
 import { statusList, typeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -44,7 +43,6 @@ export default function TableTwo() {
     };
     getReports();
   }, [getSupportReports]);
-  console.log(supportItemList);
 
   const filterWord = useSelector((state) => state.newSupportModule.filterWord);
   const filterState = useSelector(
@@ -61,7 +59,7 @@ export default function TableTwo() {
    * 3- Filter by "Tipo"
    * 4- Filter by "Fecha"
    */
-
+  console.log(supportItemList);
   const filterBySearchFilter = supportItemList?.filter((supportItem) => {
     return (
       supportItem.problemDescription
@@ -167,32 +165,11 @@ export default function TableTwo() {
             }}
           />
         </Box>
-        {/** Reset Selected Item */}
         <Button
+          color="success"
+          variant="contained"
           onClick={() => {
-            dispatch(
-              setSelectedItem({
-                tipo: "",
-                fecha: "",
-                usuario: "",
-                problema: "",
-                solución: "",
-                estado: "",
-              })
-            );
-            dispatch(openEditDialog());
-          }}
-          sx={{
-            backgroundColor: "#22c55e",
-            alignSelf: "center",
-            color: "white",
-
-            width: "150px",
-
-            "&:hover": {
-              backgroundColor: "green",
-              color: "white",
-            },
+            dispatch(openCreateNewDialog());
           }}
         >
           Nuevo

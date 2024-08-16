@@ -1,112 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  statusList,
-  typeList,
-  cancelationList,
-} from "../../constants/ModuloSoporte";
+import { cancelationList } from "../../constants/ModuloSoporte";
 //Data Mock
-const data = [
+
+const newItem = {
+  type: "",
+  date: "",
+  user: "",
+  problemDescription: "",
+  solutionDescription: "",
+  supportState: "en progreso",
+  shipmentDetails: {
+    branchOffice: null,
+    shipmentDate: null,
+    shipmentDestination: null,
+    shipmentOrigin: null,
+    shipmentState: null,
+    trackNumber: null,
+  },
+};
+
+const trackingService = [
   {
-    tipo: typeList.CANCELACIÓN,
-    fecha: "2024/08/02",
-    usuario: "Jorge Frausto",
-    problema: "No se puede cancelar",
-    solución: "Se cancela la compra",
-    estado: statusList.COMPLETADO,
+    trackNumber: "01BR0S0C0LM1",
+    user: "Jorge Frausto",
+    date: "2024-08-15T17:16:05.375Z",
+    branchOffice: "Los Mochis",
+    shipmentOrigin: "Querétaro",
+    shipmentDestination: "Los Mochis",
+    shipmentState: "En transito",
   },
   {
-    tipo: typeList.CANCELACIÓN,
-    fecha: "2024/08/03",
-    usuario: "Jorge Frausto",
-    problema: "No se puede procesar",
-    solución: "Se cancela la compra",
-    estado: statusList.PENDIENTE,
+    trackNumber: "11B2CS0C0LM2",
+    user: "Jorge Frausto",
+    date: "2024-08-17T17:16:05.375Z",
+    branchOffice: "Los Mochis",
+    shipmentOrigin: "Veracruz",
+    shipmentDestination: "Los Mochis",
+    shipmentState: "En transito",
   },
   {
-    tipo: typeList.CANCELACIÓN,
-    fecha: "2024/08/04",
-    usuario: "Mario Perez",
-    problema: "Error en id",
-    solución: "Editar el id ",
-    estado: statusList.ENPROGRESO,
+    trackNumber: "01BR0S0C0LM3",
+    user: "Mario Perez",
+    date: "2024-08-13T17:16:05.375Z",
+    branchOffice: "Los Mochis",
+    shipmentOrigin: "Tijuana",
+    shipmentDestination: "Los Mochis",
+    shipmentState: "En transito",
   },
   {
-    tipo: typeList.CANCELACIÓN,
-    fecha: "2024/08/04",
-    usuario: "Mario Perez",
-    problema: "Error en id",
-    solución: "Editar el id ",
-    estado: statusList.CANCELADO,
-  },
-  {
-    tipo: typeList.REGISTRO,
-    fecha: "2024/08/05",
-    usuario: "Jorge Frausto",
-    problema: "Internal Server Error",
-    solución: "Se cacha el error",
-    estado: statusList.ENPROGRESO,
-  },
-  {
-    tipo: typeList.REGISTRO,
-    fecha: "2024/08/06",
-    usuario: "Mario Perez",
-    problema: "Registro de usuario fallido",
-    solución: "Se registra manual",
-    estado: statusList.COMPLETADO,
-  },
-  {
-    tipo: typeList.REGISTRO,
-    fecha: "2024/12/15",
-    usuario: "Jorge Frausto",
-    problema: "Producto dañado",
-    solución: "Se procesa reembolso",
-    estado: statusList.COMPLETADO,
-  },
-  {
-    tipo: typeList.REGISTRO,
-    fecha: "2024/12/16",
-    usuario: "Jorge Frausto",
-    problema: "Talla incorrecta",
-    solución: "Se envía nueva talla",
-    estado: statusList.PENDIENTE,
-  },
-  {
-    tipo: typeList.REGISTRO,
-    fecha: "2024/12/17",
-    usuario: "Jorge Frausto",
-    problema: "Error de validación",
-    solución: "Se corrige formulario",
-    estado: statusList.ENPROGRESO,
-  },
-  {
-    tipo: typeList.SOPORTE,
-    fecha: "2024/12/18",
-    usuario: "Mario Perez",
-    problema: "Transacción rechazada",
-    solución: "Se contacta al banco",
-    estado: statusList.CANCELADO,
-  },
-  {
-    tipo: typeList.SOPORTE,
-    fecha: "2024/12/19",
-    usuario: "Mario Perez",
-    problema: "Dirección incorrecta",
-    solución: "Se actualiza dirección",
-    estado: statusList.ENPROGRESO,
-  },
-  {
-    tipo: typeList.SOPORTE,
-    fecha: "2024/12/20",
-    usuario: "Mario Perez",
-    problema: "Información de producto",
-    solución: "Se proporciona detalles",
-    estado: statusList.COMPLETADO,
+    trackNumber: "C1BR0S0C0LM4",
+    user: "Mario Perez",
+    date: "2024-08-12T17:16:05.375Z",
+    branchOffice: "Los Mochis",
+    shipmentOrigin: "Saltillo",
+    shipmentDestination: "Los Mochis",
+    shipmentState: "En transito",
   },
 ];
+
 const initialState = {
-  value: data,
   isOpenEditDialog: false,
   isOpenDeleteDialog: false,
+  isOpenCreateNewDialog: false,
+  newItem,
   selectedItem: {},
   filterWord: "",
   filterState: "",
@@ -115,6 +71,8 @@ const initialState = {
   cancelation: cancelationList.GUÍA,
   searchGuideNumberOrUser: "",
   cancelationReason: "",
+  trackingService,
+  selectedTracking: {},
 };
 
 const newSupportModule = createSlice({
@@ -123,6 +81,15 @@ const newSupportModule = createSlice({
   reducers: {
     setSelectedItem: (state, action) => {
       state.selectedItem = action.payload;
+    },
+    setNewItem: (state, action) => {
+      state.newItem = action.payload;
+    },
+    openCreateNewDialog: (state) => {
+      state.isOpenCreateNewDialog = true;
+    },
+    closeCreateNewDialog: (state) => {
+      state.isOpenCreateNewDialog = false;
     },
     openEditDialog: (state) => {
       state.isOpenEditDialog = true;
@@ -157,10 +124,16 @@ const newSupportModule = createSlice({
     setCancelationReason: (state, action) => {
       state.cancelationReason = action.payload;
     },
+    setSelectedTracking: (state, action) => {
+      state.selectedTracking = action.payload;
+    },
   },
 });
 export const {
+  setNewItem,
   setSelectedItem,
+  openCreateNewDialog,
+  closeCreateNewDialog,
   openEditDialog,
   closeEditDialog,
   openDeleteDialog,
@@ -172,6 +145,7 @@ export const {
   setCancelation,
   setGuideNumberOrUser,
   setCancelationReason,
+  setSelectedTracking,
 } = newSupportModule.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 
