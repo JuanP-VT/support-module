@@ -40,7 +40,16 @@ export default function NewSupportModalNormal() {
           freeSolo
           onChange={(_, val) => {
             dispatch(setNewItem({ ...newItem, type: val }));
-            dispatch(setSelectedTracking({}));
+            dispatch(
+              setSelectedTracking({
+                shipmentDate: null,
+                shipmentDestination: null,
+                shipmentOrigin: null,
+                branchOffice: null,
+                shipmentState: "en transito",
+                trackNumber: null,
+              })
+            );
           }}
           size="small"
           sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
