@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { closeDeleteDialog } from "../redux/features/newSupportModuleSlice";
+import { setIsOpenDeleteDialog } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 
 export default function DeleteModal() {
@@ -16,7 +16,10 @@ export default function DeleteModal() {
   );
   return (
     <div>
-      <Modal open={isOpen} onClose={() => dispatch(closeDeleteDialog())}>
+      <Modal
+        open={isOpen}
+        onClose={() => dispatch(setIsOpenDeleteDialog(false))}
+      >
         <Box
           sx={{
             position: "absolute",
@@ -38,12 +41,12 @@ export default function DeleteModal() {
           </Typography>
           <Close
             sx={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
-            onClick={() => dispatch(closeDeleteDialog())}
+            onClick={() => dispatch(setIsOpenDeleteDialog(false))}
           />
 
           <Box sx={{ pt: 2 }}>
             <Button
-              onClick={() => alert(JSON.stringify(selectedItem))}
+              onClick={() => console.log(selectedItem)}
               sx={{
                 backgroundColor: "green",
                 color: "white",
@@ -57,7 +60,7 @@ export default function DeleteModal() {
               Aceptar
             </Button>
             <Button
-              onClick={() => dispatch(closeDeleteDialog())}
+              onClick={() => dispatch(setIsOpenDeleteDialog(false))}
               sx={{
                 backgroundColor: "red",
                 color: "white",

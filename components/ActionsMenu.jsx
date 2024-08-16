@@ -7,8 +7,8 @@ import { Edit, Delete } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import {
-  openDeleteDialog,
   openEditDialog,
+  setIsOpenDeleteDialog,
   setSelectedItem,
 } from "../redux/features/newSupportModuleSlice";
 
@@ -51,7 +51,7 @@ export default function ActionsMenu({ supportItem }) {
         <MenuItem
           onClick={() => {
             dispatch(setSelectedItem(supportItem));
-            dispatch(openDeleteDialog());
+            dispatch(setIsOpenDeleteDialog(true));
             handleClose();
           }}
         >

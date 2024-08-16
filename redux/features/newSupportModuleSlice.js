@@ -94,11 +94,8 @@ const newSupportModule = createSlice({
     closeEditDialog: (state) => {
       state.isOpenEditDialog = false;
     },
-    openDeleteDialog: (state) => {
-      state.isOpenDeleteDialog = true;
-    },
-    closeDeleteDialog: (state) => {
-      state.isOpenDeleteDialog = false;
+    setIsOpenDeleteDialog: (state, action) => {
+      state.isOpenDeleteDialog = action.payload;
     },
     setFilterWord: (state, action) => {
       state.filterWord = action.payload;
@@ -132,8 +129,7 @@ export const {
   setIsOpenCreateNewDialog,
   openEditDialog,
   closeEditDialog,
-  openDeleteDialog,
-  closeDeleteDialog,
+  setIsOpenDeleteDialog,
   setFilterWord,
   setFilterState,
   setFilterType,
