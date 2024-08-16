@@ -22,7 +22,6 @@ const newItem = {
 const trackingService = [
   {
     trackNumber: "01BR0S0C0LM1",
-    user: "Jorge Frausto",
     shipmentDate: "2024-08-15T17:16:05.375Z",
     branchOffice: "Los Mochis",
     shipmentOrigin: "Querétaro",
@@ -31,7 +30,6 @@ const trackingService = [
   },
   {
     trackNumber: "11B2CS0C0LM2",
-    user: "Jorge Frausto",
     shipmentDate: "2024-08-17T17:16:05.375Z",
     branchOffice: "Los Mochis",
     shipmentOrigin: "Veracruz",
@@ -40,7 +38,6 @@ const trackingService = [
   },
   {
     trackNumber: "01BR0S0C0LM3",
-    user: "Mario Perez",
     shipmentDate: "2024-08-13T17:16:05.375Z",
     branchOffice: "Los Mochis",
     shipmentOrigin: "Tijuana",
@@ -49,7 +46,6 @@ const trackingService = [
   },
   {
     trackNumber: "C1BR0S0C0LM4",
-    user: "Mario Perez",
     shipmentDate: "2024-08-12T17:16:05.375Z",
     branchOffice: "Los Mochis",
     shipmentOrigin: "Saltillo",

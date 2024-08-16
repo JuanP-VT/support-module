@@ -81,7 +81,6 @@ export default function NewSupportModalCancelation() {
             >
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>No.Guía</TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>Usuario</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Fecha</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Sucursal</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>
@@ -105,7 +104,6 @@ export default function NewSupportModalCancelation() {
                   <TableCell sx={{ maxWidth: "100px", wordWrap: "break-word" }}>
                     {item.trackNumber}
                   </TableCell>
-                  <TableCell>{item.user}</TableCell>
                   <TableCell>
                     {format(new Date(item.shipmentDate), "dd/MM/yyyy")}
                   </TableCell>
