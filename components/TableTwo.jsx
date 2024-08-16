@@ -166,6 +166,8 @@ export default function TableTwo() {
           />
         </Box>
         <Button
+          size="small"
+          sx={{ alignSelf: "center", p: 1 }}
           color="success"
           variant="contained"
           onClick={() => {
