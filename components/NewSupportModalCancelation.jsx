@@ -107,7 +107,7 @@ export default function NewSupportModalCancelation() {
                   </TableCell>
                   <TableCell>{item.user}</TableCell>
                   <TableCell>
-                    {format(new Date(item.date), "dd/MM/yyyy")}
+                    {format(new Date(item.shipmentDate), "dd/MM/yyyy")}
                   </TableCell>
                   <TableCell sx={{ whiteSpace: "nowrap" }}>
                     {item.branchOffice}
