@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { closeCreateNewDialog } from "../redux/features/newSupportModuleSlice";
+import { setIsOpenCreateNewDialog } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 import SupportModalNormal from "./NewSupportModalNormal";
 import { useState } from "react";
@@ -25,7 +25,10 @@ export default function SupportModal() {
   };
   return (
     <div>
-      <Modal open={isOpen} onClose={() => dispatch(closeCreateNewDialog())}>
+      <Modal
+        open={isOpen}
+        onClose={() => dispatch(setIsOpenCreateNewDialog(false))}
+      >
         <Box
           sx={{
             width: "100%",
@@ -45,7 +48,7 @@ export default function SupportModal() {
           </Typography>
           <Close
             sx={{ cursor: "pointer", position: "absolute", top: 20, right: 20 }}
-            onClick={() => dispatch(closeCreateNewDialog())}
+            onClick={() => dispatch(setIsOpenCreateNewDialog(false))}
           />
           <Box sx={{ display: "flex", mb: 2 }}>
             <Button
@@ -76,7 +79,7 @@ export default function SupportModal() {
             <Button
               color="error"
               variant="contained"
-              onClick={() => dispatch(closeCreateNewDialog())}
+              onClick={() => dispatch(setIsOpenCreateNewDialog(false))}
             >
               Cancelar
             </Button>

@@ -85,11 +85,8 @@ const newSupportModule = createSlice({
     setNewItem: (state, action) => {
       state.newItem = action.payload;
     },
-    openCreateNewDialog: (state) => {
-      state.isOpenCreateNewDialog = true;
-    },
-    closeCreateNewDialog: (state) => {
-      state.isOpenCreateNewDialog = false;
+    setIsOpenCreateNewDialog: (state, action) => {
+      state.isOpenCreateNewDialog = action.payload;
     },
     openEditDialog: (state) => {
       state.isOpenEditDialog = true;
@@ -132,8 +129,7 @@ const newSupportModule = createSlice({
 export const {
   setNewItem,
   setSelectedItem,
-  openCreateNewDialog,
-  closeCreateNewDialog,
+  setIsOpenCreateNewDialog,
   openEditDialog,
   closeEditDialog,
   openDeleteDialog,

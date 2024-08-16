@@ -21,7 +21,7 @@ import {
 import { Search } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import {
-  openCreateNewDialog,
+  setIsOpenCreateNewDialog,
   setFilterDate,
   setFilterState,
   setFilterType,
@@ -169,7 +169,7 @@ export default function TableTwo() {
           color="success"
           variant="contained"
           onClick={() => {
-            dispatch(openCreateNewDialog());
+            dispatch(setIsOpenCreateNewDialog(true));
           }}
         >
           Nuevo
