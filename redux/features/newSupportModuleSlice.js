@@ -58,6 +58,7 @@ const initialState = {
   isOpenEditDialog: false,
   isOpenDeleteDialog: false,
   isOpenCreateNewDialog: false,
+  isNormalMode: true,
   newItem,
   selectedItem: {},
   filterWord: "",
@@ -75,6 +76,9 @@ const newSupportModule = createSlice({
   name: "newSupportModule",
   initialState,
   reducers: {
+    setIsNormalMode: (state, action) => {
+      state.isNormalMode = action.payload;
+    },
     setSelectedItem: (state, action) => {
       state.selectedItem = action.payload;
     },
@@ -120,6 +124,7 @@ export const {
   setNewItem,
   setSelectedItem,
   setIsOpenCreateNewDialog,
+  setIsNormalMode,
   setIsOpenEditDialog,
   setIsOpenDeleteDialog,
   setFilterWord,
