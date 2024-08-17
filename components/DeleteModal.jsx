@@ -37,38 +37,25 @@ export default function DeleteModal() {
             Cancelar Soporte
           </Typography>
           <Typography variant="h6">
-            ¿Estás seguro que deaseas cancelar este soporte?
+            ¿Estás seguro que deseas cancelar este soporte?
           </Typography>
           <Close
             sx={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
             onClick={() => dispatch(setIsOpenDeleteDialog(false))}
           />
 
-          <Box sx={{ pt: 2 }}>
+          <Box sx={{ pt: 2, display: "flex", gap: 1 }}>
             <Button
+              color="success"
+              variant="contained"
               onClick={() => console.log(selectedItem)}
-              sx={{
-                backgroundColor: "green",
-                color: "white",
-                mr: 1,
-                "&:hover": {
-                  backgroundColor: "lightgreen",
-                  color: "white",
-                },
-              }}
             >
               Aceptar
             </Button>
             <Button
+              color="error"
+              variant="contained"
               onClick={() => dispatch(setIsOpenDeleteDialog(false))}
-              sx={{
-                backgroundColor: "red",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "orange",
-                  color: "white",
-                },
-              }}
             >
               Cancelar
             </Button>
