@@ -17,12 +17,11 @@ import {
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
 import { Textarea } from "@mui/joy";
-
+import { supportTypeList } from "../constants/ModuloSoporte";
 export default function NewSupportModalNormal() {
   const dispatch = useDispatch();
   const newItem = useSelector((state) => state.newSupportModule.newItem);
 
-  const options = ["Cancelación", "Queja", "Reclamo"];
   const usuarios = ["Jorge Frausto", "Mario Perez"];
 
   return (
@@ -36,7 +35,7 @@ export default function NewSupportModalNormal() {
       >
         <Autocomplete
           value={newItem.type}
-          options={options}
+          options={supportTypeList}
           freeSolo
           onChange={(_, val) => {
             dispatch(setNewItem({ ...newItem, type: val }));
@@ -52,7 +51,12 @@ export default function NewSupportModalNormal() {
             );
           }}
           size="small"
-          sx={{ mb: 1, mr: 1, width: "100%", maxWidth: 200 }}
+          sx={{
+            mb: 1,
+            mr: 1,
+            width: "100%",
+            maxWidth: 200,
+          }}
           renderInput={(params) => <TextField {...params} label="Tipo" />}
         />
         <DatePicker

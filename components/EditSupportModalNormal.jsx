@@ -17,14 +17,13 @@ import {
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
 import { Textarea } from "@mui/joy";
-
+import { supportTypeList } from "../constants/ModuloSoporte";
 export default function EditSupportModalNormal() {
   const dispatch = useDispatch();
   const selectedItem = useSelector(
     (state) => state.newSupportModule.selectedItem
   );
 
-  const options = ["Cancelación", "Queja", "Reclamo"];
   const usuarios = ["Jorge Frausto", "Mario Perez"];
 
   return (
@@ -38,7 +37,7 @@ export default function EditSupportModalNormal() {
       >
         <Autocomplete
           value={selectedItem.type}
-          options={options}
+          options={supportTypeList}
           freeSolo
           onChange={(_, val) => {
             dispatch(setSelectedItem({ ...selectedItem, type: val }));

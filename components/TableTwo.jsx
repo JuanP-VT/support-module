@@ -27,7 +27,7 @@ import {
   setFilterType,
   setFilterWord,
 } from "../redux/features/newSupportModuleSlice";
-import { statusList, typeList } from "../constants/ModuloSoporte";
+import { statusList, supportTypeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
 import { useEffect } from "react";
@@ -145,11 +145,11 @@ export default function TableTwo() {
               label="Estatus"
             >
               <MenuItem value="">-</MenuItem>
-              <MenuItem value={typeList.CANCELACIÓN}>
-                {typeList.CANCELACIÓN}
-              </MenuItem>
-              <MenuItem value={typeList.QUEJA}>{typeList.QUEJA}</MenuItem>
-              <MenuItem value={typeList.RECLAMO}>{typeList.RECLAMO}</MenuItem>
+              {supportTypeList.map((type, index) => (
+                <MenuItem key={`${type}-${index}`} value={type}>
+                  {type}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <DatePicker

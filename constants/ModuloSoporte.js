@@ -5,12 +5,12 @@ export const statusList = {
   CANCELADO: "cancelado",
 };
 
-export const typeList = {
-  CANCELACIÓN: "Cancelación",
-  RECLAMO: "reclamo",
-  QUEJA: "queja",
-  DEVOLUCIÓN: "devolución",
-};
+export const supportTypeList = [
+  "Cancelación",
+  "Reclamo",
+  "Queja",
+  "Devolución",
+];
 
 export const cancelationList = {
   GUÍA: "Guía",
