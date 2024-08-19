@@ -6,10 +6,10 @@ export const statusList = {
 };
 
 export const supportTypeList = [
-  "Cancelación",
-  "Reclamo",
-  "Queja",
-  "Devolución",
+  "cancelación",
+  "reclamo",
+  "queja",
+  "devolución",
 ];
 
 export const cancelationList = {

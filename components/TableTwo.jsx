@@ -59,7 +59,7 @@ export default function TableTwo() {
    * 3- Filter by "Tipo"
    * 4- Filter by "Fecha"
    */
-  console.log(supportItemList);
+
   const filterBySearchFilter = supportItemList?.filter((supportItem) => {
     return (
       supportItem.problemDescription
@@ -146,7 +146,11 @@ export default function TableTwo() {
             >
               <MenuItem value="">-</MenuItem>
               {supportTypeList.map((type, index) => (
-                <MenuItem key={`${type}-${index}`} value={type}>
+                <MenuItem
+                  key={`${type}-${index}`}
+                  value={type}
+                  sx={{ textTransform: "capitalize" }}
+                >
                   {type}
                 </MenuItem>
               ))}
