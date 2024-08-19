@@ -57,7 +57,7 @@ export default function NewSupportDialog() {
             >
               Normal
             </Button>
-            {newItem.type === "Cancelación" && (
+            {newItem.type === "cancelación" && (
               <Button
                 onClick={() => setIsNormalMode(false)}
                 sx={!isNormalMode ? { borderBottom: "2px solid blue" } : {}}

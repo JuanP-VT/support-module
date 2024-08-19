@@ -36,6 +36,10 @@ export default function NewSupportModalNormal() {
         <Autocomplete
           value={newItem.type}
           options={supportTypeList}
+          getOptionLabel={
+            (option) =>
+              option.charAt(0).toUpperCase() + option.slice(1).toLowerCase() // Capitalize the first letter
+          }
           freeSolo
           onChange={(_, val) => {
             dispatch(setNewItem({ ...newItem, type: val }));

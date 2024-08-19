@@ -36,6 +36,10 @@ export default function EditSupportModalNormal() {
         }}
       >
         <Autocomplete
+          getOptionLabel={
+            (option) =>
+              option.charAt(0).toUpperCase() + option.slice(1).toLowerCase() // Capitalize the first letter
+          }
           value={selectedItem.type}
           options={supportTypeList}
           freeSolo
@@ -47,7 +51,7 @@ export default function EditSupportModalNormal() {
                 shipmentDestination: null,
                 shipmentOrigin: null,
                 branchOffice: null,
-                shipmentState: "en transito",
+                shipmentState: null,
                 trackNumber: null,
               })
             );
