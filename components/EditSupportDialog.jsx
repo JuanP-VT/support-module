@@ -75,7 +75,7 @@ export default function EditSupportModal() {
             >
               Normal
             </Button>
-            {selectedItem.type === "Cancelación" && (
+            {selectedItem?.type?.toLowerCase() === "cancelación" && (
               <Button
                 onClick={() => dispatch(setIsNormalMode(false))}
                 sx={!isNormalMode ? { borderBottom: "2px solid blue" } : {}}
