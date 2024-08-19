@@ -14,6 +14,23 @@ export default function DeleteModal() {
   const isOpen = useSelector(
     (state) => state.newSupportModule.isOpenDeleteDialog
   );
+
+  const handleDelete = async () => {
+    //Cambiar a rtk query
+    const response = await fetch(
+      `https://nestjs-technical-test-production.up.railway.app/api/support-reports/${selectedItem.id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "DELETE",
+        body: JSON.stringify({ id: selectedItem.id }),
+      }
+    );
+    console.log(response);
+    const res = await response.json();
+    console.log(res);
+  };
   return (
     <div>
       <Modal
@@ -48,7 +65,7 @@ export default function DeleteModal() {
             <Button
               color="success"
               variant="contained"
-              onClick={() => console.log(selectedItem)}
+              onClick={() => handleDelete()}
             >
               Aceptar
             </Button>
