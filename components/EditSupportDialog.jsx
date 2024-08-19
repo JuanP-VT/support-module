@@ -39,7 +39,16 @@ export default function EditSupportModal() {
         open={isOpen}
         onClose={() => {
           dispatch(setIsOpenEditDialog(false));
-          dispatch(setSelectedTracking({}));
+          dispatch(
+            setSelectedTracking({
+              shipmentDate: null,
+              shipmentDestination: null,
+              shipmentOrigin: null,
+              branchOffice: null,
+              shipmentState: null,
+              trackNumber: null,
+            })
+          );
           dispatch(setIsNormalMode(true));
         }}
       >
@@ -64,7 +73,16 @@ export default function EditSupportModal() {
             sx={{ cursor: "pointer", position: "absolute", top: 20, right: 20 }}
             onClick={() => {
               dispatch(setIsOpenEditDialog(false));
-              dispatch(setSelectedTracking({}));
+              dispatch(
+                setSelectedTracking({
+                  shipmentDate: null,
+                  shipmentDestination: null,
+                  shipmentOrigin: null,
+                  branchOffice: null,
+                  shipmentState: null,
+                  trackNumber: null,
+                })
+              );
               dispatch(setIsNormalMode(true));
             }}
           />
@@ -99,7 +117,16 @@ export default function EditSupportModal() {
               variant="contained"
               onClick={() => {
                 dispatch(setIsOpenEditDialog(false));
-                dispatch(setSelectedTracking({}));
+                dispatch(
+                  setSelectedTracking({
+                    shipmentDate: null,
+                    shipmentDestination: null,
+                    shipmentOrigin: null,
+                    branchOffice: null,
+                    shipmentState: null,
+                    trackNumber: null,
+                  })
+                );
                 dispatch(setIsNormalMode(true));
               }}
             >
