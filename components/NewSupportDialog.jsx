@@ -19,9 +19,23 @@ export default function NewSupportDialog() {
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    //Cambiar a rtk query
     const itemToSubmit = { ...newItem, shipmentDetails: selectedTrackingGuide };
     console.log(itemToSubmit);
+    const response = await fetch(
+      "https://nestjs-technical-test-production.up.railway.app/api/support-reports",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(itemToSubmit),
+      }
+    );
+    const res = await response.json();
+
+    console.log(res);
   };
   return (
     <div>
