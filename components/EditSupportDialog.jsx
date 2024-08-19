@@ -26,12 +26,24 @@ export default function EditSupportModal() {
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    //Cambiar a rtk query
     const itemToSubmit = {
       ...selectedItem,
+      id: undefined,
       shipmentDetails: selectedTrackingGuide,
     };
-    console.log(itemToSubmit);
+    const response = await fetch(
+      `https://nestjs-technical-test-production.up.railway.app/api/support-reports/${selectedItem.id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PATCH",
+        body: JSON.stringify(itemToSubmit),
+      }
+    );
+    console.log(response);
   };
   return (
     <div>
