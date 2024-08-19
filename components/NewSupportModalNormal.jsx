@@ -49,7 +49,7 @@ export default function NewSupportModalNormal() {
                 shipmentDestination: null,
                 shipmentOrigin: null,
                 branchOffice: null,
-                shipmentState: null,
+                shipmentState: "en transito",
                 trackNumber: null,
               })
             );
