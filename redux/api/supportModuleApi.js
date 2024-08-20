@@ -6,10 +6,11 @@ export const supportModuleApi = createApi({
     baseUrl:
       "https://nestjs-technical-test-production.up.railway.app/api/support-reports",
   }),
-
+  tagTypes: ["SupportReports"],
   endpoints: (builder) => ({
     getSupportReports: builder.query({
       query: () => "",
+      providesTags: ["SupportReports"],
     }),
     createSupportReport: builder.mutation({
       query: (body) => ({
@@ -17,6 +18,7 @@ export const supportModuleApi = createApi({
         body,
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: ["SupportReports"],
     }),
     updateSupportReport: builder.mutation({
       query: ({ id, body }) => ({
@@ -25,6 +27,7 @@ export const supportModuleApi = createApi({
         body,
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: ["SupportReports"],
     }),
     deleteSupportReport: builder.mutation({
       query: (id) => ({
@@ -32,6 +35,7 @@ export const supportModuleApi = createApi({
         url: `/${id}`,
         responseHandler: (response) => response.text(),
       }),
+      invalidatesTags: ["SupportReports"],
     }),
   }),
 });
