@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import newSupportModuleReducer from "./features/newSupportModuleSlice";
-import { supportModuleApi } from "./api/supportModuleApi";
+import supportReportsReducer from "./features/supportReportsSlice";
+import { supportReportsApi } from "./api/supportReportsApi";
 
 export const store = configureStore({
   reducer: {
-    [supportModuleApi.reducerPath]: supportModuleApi.reducer,
-    newSupportModule: newSupportModuleReducer,
+    [supportReportsApi.reducerPath]: supportReportsApi.reducer,
+    supportReports: supportReportsReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(supportModuleApi.middleware),
+    getDefaultMiddleware().concat(supportReportsApi.middleware),
 });

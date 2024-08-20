@@ -7,26 +7,26 @@ import {
   resetSelectedTracking,
   setIsNormalMode,
   setIsOpenEditDialog,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 import { Close } from "@mui/icons-material";
 import EditSupportModalNormal from "./EditSupportModalNormal";
 import EditSupportModalCancelation from "./EditSupportModalCancelation";
-import { useUpdateSupportReportMutation } from "../redux/api/supportModuleApi";
+import { useUpdateSupportReportMutation } from "../redux/api/supportReportsApi";
 import swal from "sweetalert";
 export default function EditSupportModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector(
-    (state) => state.newSupportModule.isOpenEditDialog
+    (state) => state.supportReports.isOpenEditDialog
   );
   const selectedItem = useSelector(
-    (state) => state.newSupportModule.selectedItem
+    (state) => state.supportReports.selectedItem
   );
   const isNormalMode = useSelector(
-    (state) => state.newSupportModule.isNormalMode
+    (state) => state.supportReports.isNormalMode
   );
 
   const selectedTrackingGuide = useSelector(
-    (state) => state.newSupportModule.selectedTracking
+    (state) => state.supportReports.selectedTracking
   );
 
   const [updateSupportReport, { isLoading }] = useUpdateSupportReportMutation();

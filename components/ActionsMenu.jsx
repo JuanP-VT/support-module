@@ -11,7 +11,7 @@ import {
   setIsOpenEditDialog,
   setSelectedItem,
   setSelectedTracking,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 
 export default function ActionsMenu({ supportItem }) {
   const [anchorEl, setAnchorEl] = React.useState(null);

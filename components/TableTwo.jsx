@@ -1,4 +1,4 @@
-import { useLazyGetSupportReportsQuery } from "../redux/api/supportModuleApi";
+import { useLazyGetSupportReportsQuery } from "../redux/api/supportReportsApi";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -26,7 +26,7 @@ import {
   setFilterState,
   setFilterType,
   setFilterWord,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 import { statusList, supportTypeList } from "../constants/ModuloSoporte";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, isAfter, isSameDay } from "date-fns";
@@ -44,13 +44,13 @@ export default function TableTwo() {
     getReports();
   }, [getSupportReports]);
 
-  const filterWord = useSelector((state) => state.newSupportModule.filterWord);
+  const filterWord = useSelector((state) => state.supportReports.filterWord);
   const filterState = useSelector(
-    (state) => state.newSupportModule.filterState
+    (state) => state.supportReports.filterState
   );
-  const filterType = useSelector((state) => state.newSupportModule.filterType);
+  const filterType = useSelector((state) => state.supportReports.filterType);
   const selectedDate = useSelector(
-    (state) => state.newSupportModule.filterDate
+    (state) => state.supportReports.filterDate
   );
   /**
    * We filter data in steps

@@ -3,17 +3,17 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsOpenDeleteDialog } from "../redux/features/newSupportModuleSlice";
+import { setIsOpenDeleteDialog } from "../redux/features/supportReportsSlice";
 import { Close } from "@mui/icons-material";
-import { useDeleteSupportReportMutation } from "../redux/api/supportModuleApi";
+import { useDeleteSupportReportMutation } from "../redux/api/supportReportsApi";
 import swal from "sweetalert";
 export default function DeleteModal() {
   const dispatch = useDispatch();
   const selectedItem = useSelector(
-    (state) => state.newSupportModule.selectedItem
+    (state) => state.supportReports.selectedItem
   );
   const isOpen = useSelector(
-    (state) => state.newSupportModule.isOpenDeleteDialog
+    (state) => state.supportReports.isOpenDeleteDialog
   );
   const [deleteSupportReport, { isLoading }] = useDeleteSupportReportMutation();
   const handleDelete = async () => {

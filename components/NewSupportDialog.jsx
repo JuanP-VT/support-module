@@ -6,23 +6,23 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   resetNewItem,
   setIsOpenCreateNewDialog,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 import { Close } from "@mui/icons-material";
 import SupportModalNormal from "./NewSupportModalNormal";
 import { useState } from "react";
 import NewSupportModalCancelation from "./NewSupportModalCancelation";
-import { useCreateSupportReportMutation } from "../redux/api/supportModuleApi";
+import { useCreateSupportReportMutation } from "../redux/api/supportReportsApi";
 import swal from "sweetalert";
 
 export default function NewSupportDialog() {
   const dispatch = useDispatch();
   const isOpen = useSelector(
-    (state) => state.newSupportModule.isOpenCreateNewDialog
+    (state) => state.supportReports.isOpenCreateNewDialog
   );
-  const newItem = useSelector((state) => state.newSupportModule.newItem);
+  const newItem = useSelector((state) => state.supportReports.newItem);
   const [isNormalMode, setIsNormalMode] = useState(true);
   const selectedTrackingGuide = useSelector(
-    (state) => state.newSupportModule.selectedTracking
+    (state) => state.supportReports.selectedTracking
   );
 
   const [createSupportReport, { isLoading }] = useCreateSupportReportMutation();

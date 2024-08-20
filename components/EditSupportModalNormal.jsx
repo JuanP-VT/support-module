@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   resetSelectedTracking,
   setSelectedItem,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
 import { Textarea } from "@mui/joy";
@@ -21,7 +21,7 @@ import { supportTypeList } from "../constants/ModuloSoporte";
 export default function EditSupportModalNormal() {
   const dispatch = useDispatch();
   const selectedItem = useSelector(
-    (state) => state.newSupportModule.selectedItem
+    (state) => state.supportReports.selectedItem
   );
 
   const usuarios = ["Jorge Frausto", "Mario Perez"];

@@ -6,7 +6,7 @@ import {
   setCancelationReason,
   setGuideNumberOrUser,
   setSelectedTracking,
-} from "../redux/features/newSupportModuleSlice";
+} from "../redux/features/supportReportsSlice";
 import { cancelationList } from "../constants/ModuloSoporte";
 import {
   Autocomplete,
@@ -25,14 +25,14 @@ import { format } from "date-fns";
 export default function EditSupportModalCancelation() {
   const dispatch = useDispatch();
   const cancelation = useSelector(
-    (state) => state.newSupportModule.cancelation
+    (state) => state.supportReports.cancelation
   );
   const selectedItem = useSelector(
-    (state) => state.newSupportModule.selectedItem
+    (state) => state.supportReports.selectedItem
   );
 
   const trackingServiceResponse = useSelector(
-    (state) => state.newSupportModule.trackingService
+    (state) => state.supportReports.trackingService
   );
   let trackingGuides = [...trackingServiceResponse];
 
@@ -42,7 +42,7 @@ export default function EditSupportModalCancelation() {
   }
 
   const selectedTracking = useSelector(
-    (state) => state.newSupportModule.selectedTracking
+    (state) => state.supportReports.selectedTracking
   );
 
   const handleChange = (event, newAlignment) => {

@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { cancelationList } from "../../constants/ModuloSoporte";
 
 //Data Mock
-
 const newItem = {
   type: "",
   date: "",
@@ -80,8 +79,8 @@ const initialState = {
   },
 };
 
-const newSupportModule = createSlice({
-  name: "newSupportModule",
+const supportReportsSlice = createSlice({
+  name: "supportReports",
   initialState,
   reducers: {
     setIsNormalMode: (state, action) => {
@@ -151,7 +150,7 @@ export const {
   setSelectedTracking,
   resetNewItem,
   resetSelectedTracking,
-} = newSupportModule.actions;
+} = supportReportsSlice.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 
-export default newSupportModule.reducer;
+export default supportReportsSlice.reducer;

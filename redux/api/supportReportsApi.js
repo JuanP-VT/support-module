@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const supportModuleApi = createApi({
-  reducerPath: "supportModuleApi",
+export const supportReportsApi = createApi({
+  reducerPath: "supportReportsApi",
   baseQuery: fetchBaseQuery({
     baseUrl:
       "https://nestjs-technical-test-production.up.railway.app/api/support-reports",
@@ -46,4 +46,4 @@ export const {
   useCreateSupportReportMutation,
   useUpdateSupportReportMutation,
   useDeleteSupportReportMutation,
-} = supportModuleApi;
+} = supportReportsApi;
