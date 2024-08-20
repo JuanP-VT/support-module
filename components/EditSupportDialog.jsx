@@ -5,7 +5,6 @@ import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetSelectedTracking,
-  setDisplayBackdrop,
   setIsNormalMode,
   setIsOpenEditDialog,
 } from "../redux/features/newSupportModuleSlice";
@@ -29,10 +28,8 @@ export default function EditSupportModal() {
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
-  const displayBackdrop = useSelector(
-    (state) => state.newSupportModule.displayBackdrop
-  );
-  const [updateSupportReport] = useUpdateSupportReportMutation();
+
+  const [updateSupportReport, { isLoading }] = useUpdateSupportReportMutation();
   const handleSubmit = async () => {
     //Cambiar a rtk query
     const itemToSubmit = {
@@ -42,7 +39,6 @@ export default function EditSupportModal() {
     };
 
     try {
-      dispatch(setDisplayBackdrop(true));
       const response = await updateSupportReport({
         id: selectedItem.id,
         body: itemToSubmit,
@@ -54,10 +50,8 @@ export default function EditSupportModal() {
           icon: "error",
           button: "OK",
         });
-        dispatch(setDisplayBackdrop(false));
         return;
       }
-      dispatch(setDisplayBackdrop(false));
       dispatch(setIsOpenEditDialog(false));
       dispatch(setIsNormalMode(true));
       swal({
@@ -101,7 +95,7 @@ export default function EditSupportModal() {
         >
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={displayBackdrop}
+            open={isLoading}
           >
             <CircularProgress color="inherit" />
           </Backdrop>

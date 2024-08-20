@@ -5,7 +5,6 @@ import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetNewItem,
-  setDisplayBackdrop,
   setIsOpenCreateNewDialog,
 } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
@@ -25,15 +24,12 @@ export default function NewSupportDialog() {
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
-  const displayBackdrop = useSelector(
-    (state) => state.newSupportModule.displayBackdrop
-  );
-  const [createSupportReport] = useCreateSupportReportMutation();
+
+  const [createSupportReport, { isLoading }] = useCreateSupportReportMutation();
 
   const handleSubmit = async () => {
     const itemToSubmit = { ...newItem, shipmentDetails: selectedTrackingGuide };
     try {
-      dispatch(setDisplayBackdrop(true));
       const response = await createSupportReport(itemToSubmit);
       if (response.error) {
         swal({
@@ -42,7 +38,6 @@ export default function NewSupportDialog() {
           icon: "error",
           button: "OK",
         });
-        dispatch(setDisplayBackdrop(false));
         return;
       }
       swal({
@@ -51,12 +46,10 @@ export default function NewSupportDialog() {
         icon: "success",
         button: "OK",
       });
-      dispatch(setDisplayBackdrop(false));
       dispatch(resetNewItem());
       dispatch(setIsOpenCreateNewDialog(false));
       setIsNormalMode(true);
     } catch (error) {
-      dispatch(setDisplayBackdrop(false));
       swal({
         title: "Error",
         text: error?.data?.message ?? "Algo salió mal",
@@ -87,7 +80,7 @@ export default function NewSupportDialog() {
         >
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={displayBackdrop}
+            open={isLoading}
           >
             <CircularProgress color="inherit" />
           </Backdrop>

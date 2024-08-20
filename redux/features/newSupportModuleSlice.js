@@ -78,7 +78,6 @@ const initialState = {
     shipmentState: null,
     trackNumber: null,
   },
-  displayBackdrop: false,
 };
 
 const newSupportModule = createSlice({
@@ -127,9 +126,6 @@ const newSupportModule = createSlice({
     setSelectedTracking: (state, action) => {
       state.selectedTracking = action.payload;
     },
-    setDisplayBackdrop: (state, action) => {
-      state.displayBackdrop = action.payload;
-    },
     resetNewItem: (state) => {
       state.newItem = initialState.newItem;
     },
@@ -153,7 +149,6 @@ export const {
   setGuideNumberOrUser,
   setCancelationReason,
   setSelectedTracking,
-  setDisplayBackdrop,
   resetNewItem,
   resetSelectedTracking,
 } = newSupportModule.actions;
