@@ -1,11 +1,12 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsOpenDeleteDialog } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
-
+import { useDeleteSupportReportMutation } from "../redux/api/supportModuleApi";
+import swal from "sweetalert";
 export default function DeleteModal() {
   const dispatch = useDispatch();
   const selectedItem = useSelector(
@@ -14,22 +15,25 @@ export default function DeleteModal() {
   const isOpen = useSelector(
     (state) => state.newSupportModule.isOpenDeleteDialog
   );
-
+  const [deleteSupportReport, { isLoading }] = useDeleteSupportReportMutation();
   const handleDelete = async () => {
-    //Cambiar a rtk query
-    const response = await fetch(
-      `https://nestjs-technical-test-production.up.railway.app/api/support-reports/${selectedItem.id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "DELETE",
-        body: JSON.stringify({ id: selectedItem.id }),
-      }
-    );
-    console.log(response);
-    const res = await response.json();
-    console.log(res);
+    const response = await deleteSupportReport(selectedItem.id);
+    if (response.error) {
+      swal({
+        title: "Error en el cuerpo de la petición",
+        text: response.error?.data ?? "Algo salio mal",
+        icon: "error",
+        button: "OK",
+      });
+      return;
+    }
+    swal({
+      title: "Éxito",
+      text: "Se ha eliminado el reporte correctamente",
+      icon: "success",
+      button: "OK",
+    });
+    dispatch(setIsOpenDeleteDialog(false));
   };
   return (
     <div>
@@ -50,6 +54,12 @@ export default function DeleteModal() {
             p: 4,
           }}
         >
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isLoading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
           <Typography variant="h4" sx={{ mb: 2 }}>
             Cancelar Soporte
           </Typography>

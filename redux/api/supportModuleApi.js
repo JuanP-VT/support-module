@@ -26,6 +26,13 @@ export const supportModuleApi = createApi({
         responseHandler: (response) => response.text(),
       }),
     }),
+    deleteSupportReport: builder.mutation({
+      query: (id) => ({
+        method: "DELETE",
+        url: `/${id}`,
+        responseHandler: (response) => response.text(),
+      }),
+    }),
   }),
 });
 
@@ -34,4 +41,5 @@ export const {
   useLazyGetSupportReportsQuery,
   useCreateSupportReportMutation,
   useUpdateSupportReportMutation,
+  useDeleteSupportReportMutation,
 } = supportModuleApi;
