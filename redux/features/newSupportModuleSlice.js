@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { cancelationList } from "../../constants/ModuloSoporte";
+
 //Data Mock
 
 const newItem = {
@@ -70,6 +71,7 @@ const initialState = {
   cancelationReason: "",
   trackingService,
   selectedTracking: {},
+  displayBackdrop: false,
 };
 
 const newSupportModule = createSlice({
@@ -118,6 +120,12 @@ const newSupportModule = createSlice({
     setSelectedTracking: (state, action) => {
       state.selectedTracking = action.payload;
     },
+    setDisplayBackdrop: (state, action) => {
+      state.displayBackdrop = action.payload;
+    },
+    resetNewItem: (state) => {
+      state.newItem = initialState.newItem;
+    },
   },
 });
 export const {
@@ -135,6 +143,8 @@ export const {
   setGuideNumberOrUser,
   setCancelationReason,
   setSelectedTracking,
+  setDisplayBackdrop,
+  resetNewItem,
 } = newSupportModule.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 

@@ -6,12 +6,23 @@ export const supportModuleApi = createApi({
     baseUrl:
       "https://nestjs-technical-test-production.up.railway.app/api/support-reports",
   }),
+
   endpoints: (builder) => ({
     getSupportReports: builder.query({
       query: () => "",
     }),
+    createSupportReport: builder.mutation({
+      query: (body) => ({
+        method: "POST",
+        body,
+        responseHandler: (response) => response.text(),
+      }),
+    }),
   }),
 });
 
-export const { useGetSupportReportsQuery, useLazyGetSupportReportsQuery } =
-  supportModuleApi;
+export const {
+  useGetSupportReportsQuery,
+  useLazyGetSupportReportsQuery,
+  useCreateSupportReportMutation,
+} = supportModuleApi;
