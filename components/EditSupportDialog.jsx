@@ -1,16 +1,19 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetSelectedTracking,
+  setDisplayBackdrop,
   setIsNormalMode,
   setIsOpenEditDialog,
 } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 import EditSupportModalNormal from "./EditSupportModalNormal";
 import EditSupportModalCancelation from "./EditSupportModalCancelation";
+import { useUpdateSupportReportMutation } from "../redux/api/supportModuleApi";
+import swal from "sweetalert";
 export default function EditSupportModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector(
@@ -26,6 +29,10 @@ export default function EditSupportModal() {
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
+  const displayBackdrop = useSelector(
+    (state) => state.newSupportModule.displayBackdrop
+  );
+  const [updateSupportReport] = useUpdateSupportReportMutation();
   const handleSubmit = async () => {
     //Cambiar a rtk query
     const itemToSubmit = {
@@ -33,17 +40,40 @@ export default function EditSupportModal() {
       id: undefined,
       shipmentDetails: selectedTrackingGuide,
     };
-    const response = await fetch(
-      `https://nestjs-technical-test-production.up.railway.app/api/support-reports/${selectedItem.id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "PATCH",
-        body: JSON.stringify(itemToSubmit),
+
+    try {
+      dispatch(setDisplayBackdrop(true));
+      const response = await updateSupportReport({
+        id: selectedItem.id,
+        body: itemToSubmit,
+      });
+      if (response.error) {
+        swal({
+          title: "Error en el cuerpo de la petición",
+          text: response.error?.data ?? "Algo salio mal",
+          icon: "error",
+          button: "OK",
+        });
+        dispatch(setDisplayBackdrop(false));
+        return;
       }
-    );
-    console.log(response);
+      dispatch(setDisplayBackdrop(false));
+      dispatch(setIsOpenEditDialog(false));
+      dispatch(setIsNormalMode(true));
+      swal({
+        title: "Éxito",
+        text: "Se ha editado el reporte correctamente",
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      swal({
+        title: "Error Interno",
+        text: error?.data?.message ?? "Algo salio mal",
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
   return (
     <div>
@@ -69,6 +99,12 @@ export default function EditSupportModal() {
             p: 4,
           }}
         >
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={displayBackdrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Editar Registro de Soporte
           </Typography>

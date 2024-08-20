@@ -18,6 +18,14 @@ export const supportModuleApi = createApi({
         responseHandler: (response) => response.text(),
       }),
     }),
+    updateSupportReport: builder.mutation({
+      query: ({ id, body }) => ({
+        method: "PATCH",
+        url: `/${id}`,
+        body,
+        responseHandler: (response) => response.text(),
+      }),
+    }),
   }),
 });
 
@@ -25,4 +33,5 @@ export const {
   useGetSupportReportsQuery,
   useLazyGetSupportReportsQuery,
   useCreateSupportReportMutation,
+  useUpdateSupportReportMutation,
 } = supportModuleApi;
