@@ -70,7 +70,14 @@ const initialState = {
   searchGuideNumberOrUser: "",
   cancelationReason: "",
   trackingService,
-  selectedTracking: {},
+  selectedTracking: {
+    branchOffice: null,
+    shipmentDate: null,
+    shipmentDestination: null,
+    shipmentOrigin: null,
+    shipmentState: null,
+    trackNumber: null,
+  },
   displayBackdrop: false,
 };
 
