@@ -126,6 +126,9 @@ const newSupportModule = createSlice({
     resetNewItem: (state) => {
       state.newItem = initialState.newItem;
     },
+    resetSelectedTracking: (state) => {
+      state.selectedTracking = initialState.selectedTracking;
+    },
   },
 });
 export const {
@@ -145,6 +148,7 @@ export const {
   setSelectedTracking,
   setDisplayBackdrop,
   resetNewItem,
+  resetSelectedTracking,
 } = newSupportModule.actions;
 export const selectDialog = (state) => state.dialog.isOpenDialog;
 

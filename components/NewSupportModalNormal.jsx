@@ -11,8 +11,8 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { formatISO } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  resetSelectedTracking,
   setNewItem,
-  setSelectedTracking,
 } from "../redux/features/newSupportModuleSlice";
 import { statusList } from "../constants/ModuloSoporte";
 import Status from "./Status";
@@ -43,16 +43,7 @@ export default function NewSupportModalNormal() {
           freeSolo
           onChange={(_, val) => {
             dispatch(setNewItem({ ...newItem, type: val }));
-            dispatch(
-              setSelectedTracking({
-                shipmentDate: null,
-                shipmentDestination: null,
-                shipmentOrigin: null,
-                branchOffice: null,
-                shipmentState: "en transito",
-                trackNumber: null,
-              })
-            );
+            dispatch(resetSelectedTracking());
           }}
           size="small"
           sx={{

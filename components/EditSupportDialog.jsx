@@ -4,9 +4,9 @@ import Modal from "@mui/material/Modal";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  resetSelectedTracking,
   setIsNormalMode,
   setIsOpenEditDialog,
-  setSelectedTracking,
 } from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 import EditSupportModalNormal from "./EditSupportModalNormal";
@@ -51,16 +51,7 @@ export default function EditSupportModal() {
         open={isOpen}
         onClose={() => {
           dispatch(setIsOpenEditDialog(false));
-          dispatch(
-            setSelectedTracking({
-              shipmentDate: null,
-              shipmentDestination: null,
-              shipmentOrigin: null,
-              branchOffice: null,
-              shipmentState: null,
-              trackNumber: null,
-            })
-          );
+          dispatch(resetSelectedTracking());
           dispatch(setIsNormalMode(true));
         }}
       >
@@ -85,16 +76,7 @@ export default function EditSupportModal() {
             sx={{ cursor: "pointer", position: "absolute", top: 20, right: 20 }}
             onClick={() => {
               dispatch(setIsOpenEditDialog(false));
-              dispatch(
-                setSelectedTracking({
-                  shipmentDate: null,
-                  shipmentDestination: null,
-                  shipmentOrigin: null,
-                  branchOffice: null,
-                  shipmentState: null,
-                  trackNumber: null,
-                })
-              );
+              dispatch(resetSelectedTracking());
               dispatch(setIsNormalMode(true));
             }}
           />
@@ -129,16 +111,7 @@ export default function EditSupportModal() {
               variant="contained"
               onClick={() => {
                 dispatch(setIsOpenEditDialog(false));
-                dispatch(
-                  setSelectedTracking({
-                    shipmentDate: null,
-                    shipmentDestination: null,
-                    shipmentOrigin: null,
-                    branchOffice: null,
-                    shipmentState: null,
-                    trackNumber: null,
-                  })
-                );
+                dispatch(resetSelectedTracking());
                 dispatch(setIsNormalMode(true));
               }}
             >
