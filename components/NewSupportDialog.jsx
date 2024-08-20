@@ -1,13 +1,20 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsOpenCreateNewDialog } from "../redux/features/newSupportModuleSlice";
+import {
+  resetNewItem,
+  setDisplayBackdrop,
+  setIsOpenCreateNewDialog,
+} from "../redux/features/newSupportModuleSlice";
 import { Close } from "@mui/icons-material";
 import SupportModalNormal from "./NewSupportModalNormal";
 import { useState } from "react";
 import NewSupportModalCancelation from "./NewSupportModalCancelation";
+import { useCreateSupportReportMutation } from "../redux/api/supportModuleApi";
+import swal from "sweetalert";
+
 export default function NewSupportDialog() {
   const dispatch = useDispatch();
   const isOpen = useSelector(
@@ -15,27 +22,48 @@ export default function NewSupportDialog() {
   );
   const newItem = useSelector((state) => state.newSupportModule.newItem);
   const [isNormalMode, setIsNormalMode] = useState(true);
-
   const selectedTrackingGuide = useSelector(
     (state) => state.newSupportModule.selectedTracking
   );
-  const handleSubmit = async () => {
-    //Cambiar a rtk query
-    const itemToSubmit = { ...newItem, shipmentDetails: selectedTrackingGuide };
-    console.log(itemToSubmit);
-    const response = await fetch(
-      "https://nestjs-technical-test-production.up.railway.app/api/support-reports",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(itemToSubmit),
-      }
-    );
-    const res = await response.json();
+  const displayBackdrop = useSelector(
+    (state) => state.newSupportModule.displayBackdrop
+  );
+  const [createSupportReport] = useCreateSupportReportMutation();
 
-    console.log(res);
+  const handleSubmit = async () => {
+    const itemToSubmit = { ...newItem, shipmentDetails: selectedTrackingGuide };
+    try {
+      dispatch(setDisplayBackdrop(true));
+      const response = await createSupportReport(itemToSubmit);
+      if (response.error) {
+        swal({
+          title: "Error",
+          text: response.error?.data ?? "Algo salió mal",
+          icon: "error",
+          button: "OK",
+        });
+        dispatch(setDisplayBackdrop(false));
+        return;
+      }
+      swal({
+        title: "Éxito",
+        text: "Se ha creado el reporte correctamente",
+        icon: "success",
+        button: "OK",
+      });
+      dispatch(setDisplayBackdrop(false));
+      dispatch(resetNewItem());
+      dispatch(setIsOpenCreateNewDialog(false));
+      setIsNormalMode(true);
+    } catch (error) {
+      dispatch(setDisplayBackdrop(false));
+      swal({
+        title: "Error",
+        text: error?.data?.message ?? "Algo salió mal",
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
   return (
     <div>
@@ -57,6 +85,12 @@ export default function NewSupportDialog() {
             p: 4,
           }}
         >
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={displayBackdrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
           <Typography variant="h5" sx={{ mb: 2 }}>
             Nuevo Registro de Soporte
           </Typography>
